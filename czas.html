@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Czas na pasku - modyfikator paska</title>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js'
+        integrity='sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=='
+        crossorigin='anonymous'></script>
+        <link rel="shortcut icon" href="./img/tvpinfo_logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="pasek.css">
+    <style>
+        body {
+            text-align: center;
+            font-family: "Metromedium 2 W02 Roman";
+            margin: 8px;
+            background-color: white;
+            overflow-x: hidden;
+        }
+
+        input[type="text"] {
+            margin-bottom: 5px;
+        }
+
+        a:visited,
+        a:link {
+            text-decoration: none;
+            color: cornflowerblue;
+        }
+
+        .form_input {
+            display: flex;
+            flex-direction: column;
+            margin: 0 auto;
+            margin-bottom: 10px;
+            width: min-content;
+        }
+
+        .input {
+            display: flex;
+            align-items: flex-start;
+            white-space: nowrap;
+            justify-content: flex-end;
+            margin-bottom: 3px;
+        }
+
+        label {
+            margin-right: 5px;
+        }
+
+        legend {
+            color: #555555;
+            font-style: italic;
+        }
+
+        .example {
+            height: 15%;
+            margin-bottom: 10px;
+            border-radius: 20px;
+        }
+
+        .dolnabelka {
+            filter: drop-shadow(0px 0px 3px #000000);
+            user-select: none;
+            transition: right var(--dlugosc);
+            right: -1800px;
+        }
+
+        .t1x1 {
+            transform: scaleX(1.08427);
+        }
+
+        .t2 {
+            transform: scaleX(1.17527);
+        }
+    </style>
+</head>
+
+<body>
+    <a href="formularz.html"><img src="./img/tvpinfo_logo.png" alt="logo"></a>
+    <h1>Modyfikator paska z informacjami w stylu TVP INFO</h1>
+    <hr>
+    <a href="imienazwisko.html">Imie i nazwisko</a> - <a href="info.html">Główna informacja</a> - <a href="info2.html">Pilne
+        informacje</a> - <a href="info3.html">Inne informacje</a> - <a href="program.html">Zapowiedź programów</a> - <b><u>Czas na pasku</u></b> - <a href="miejsce.html">Miejsce na żywo</a> - <a href="ustawienia.html">Ustawienia paska</a>
+    <hr>
+    <form action="./php/czas_submit.php" method="GET">
+        <h2>Wprowadź czas, który będzie wyświetlać się na pasku</h2>
+        <div class="form_input">
+            <div class="input"><label for="czas">Czas:</label> <input id="czas" type="time"
+                    name="czas" required></div><br /><br />
+        </div>
+        <legend></legend>
+        <br />
+        <button type="submit">Wyświetl</button> <input type="reset" value="Wyczysc">
+    </form>
+</body>
+
+</html>

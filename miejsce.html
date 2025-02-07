@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Miejsce na żywo - modyfikator paska</title>
+    <link rel="shortcut icon" href="./img/tvpinfo_logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="pasek.css">
+    <style>
+        body {
+            text-align: center;
+            font-family: "Metromedium 2 W02 Roman";
+            margin: 8px;
+            background-color: white;
+        }
+
+        input[type="text"] {
+            margin-bottom: 5px;
+        }
+
+        a:visited,
+        a:link {
+            text-decoration: none;
+            color: cornflowerblue;
+        }
+
+        .form_input {
+            display: flex;
+            flex-direction: column;
+            margin: 0 auto;
+            margin-bottom: 10px;
+            width: min-content;
+        }
+
+        .input {
+            display: flex;
+            align-items: flex-start;
+            white-space: nowrap; 
+            justify-content: flex-end;
+            margin-bottom: 3px;
+        }
+
+        label {
+            margin-right: 5px;
+        }
+
+        legend {
+            color: #555555;
+            font-style: italic;
+        }
+
+        .example {
+            height: 15%;
+            margin-bottom: 10px;
+            border-radius: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <a href="formularz.html"><img src="./img/tvpinfo_logo.png" alt="logo"></a>
+    <h1>Modyfikator paska z informacjami w stylu TVP INFO</h1>
+    <hr>
+    <a href="imienazwisko.html">Imie i nazwisko</a> - <a href="info.html">Główna informacja</a> - <a href="info2.html">Pilne informacje</a> - <a href="info3.html">Inne informacje</a> - <a href="program.html">Zapowiedź programów</a> - <a href="czas.html">Czas na pasku</a> - <u><b>Miejsce na żywo</b></u> - <a href="ustawienia.html">Ustawienia paska</a>
+    <hr>
+    <form action="./php/miejsce_submit.php" method="GET">
+        <h2>Wpisz miejsce, które pojawi się przy kamerce gościa</h2>
+        <div class="form_input">
+        <div class="input"><label for="imienazwisko">Miejsce:</label> <input type="text" placeholder="Gdańsk" autocomplete="off"
+            name="miejsce" required></div><br /><br />
+        </div>
+
+        <legend>Wielkość znaków <u>nie ma</u> znaczenia.</legend><br />
+        <button type="submit">Wyświetl</button> <input type="reset" value="Wyczysc">
+    </form>
+</body>
+</html>

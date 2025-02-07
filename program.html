@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zapowiedź programów - modyfikator paska</title>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js'
+        integrity='sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=='
+        crossorigin='anonymous'></script>
+    <link rel="shortcut icon" href="./img/tvpinfo_logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="pasek.css">
+    <style>
+        body {
+            text-align: center;
+            font-family: "Metromedium 2 W02 Roman";
+            margin: 8px;
+            background-color: white;
+        }
+
+        input[type="text"] {
+            margin-bottom: 5px;
+        }
+
+        a:visited,
+        a:link {
+            text-decoration: none;
+            color: cornflowerblue;
+        }
+
+        .form_input {
+            display: flex;
+            flex-direction: column;
+            margin: 0 auto;
+            margin-bottom: 10px;
+            width: min-content;
+        }
+
+        .input,
+        .input_liczba {
+            display: flex;
+            align-items: flex-start;
+            white-space: nowrap;
+            justify-content: flex-end;
+            margin-bottom: 3px;
+        }
+
+        label {
+            margin-right: 5px;
+        }
+
+        legend {
+            color: #555555;
+            font-style: italic;
+        }
+
+        .example {
+            height: 15%;
+            margin-bottom: 10px;
+            border-radius: 20px;
+        }
+
+        input[type="file"] {
+            margin-left: 10px;
+            margin-top: 1px;
+        }
+
+        input[type="time"] {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <a href="formularz.html"><img src="./img/tvpinfo_logo.png" alt="logo"></a>
+    <h1>Modyfikator paska z informacjami w stylu TVP INFO</h1>
+    <hr>
+    <a href="imienazwisko.html">Imie i nazwisko</a> - <a href="info.html">Główna informacja</a> - <a
+        href="info2.html">Pilne informacje</a> - <a href="info3.html">Inne informacje</a> - <b><u>Zapowiedź
+            programów</u></b> - <a href="czas.html">Czas na pasku</a> - <a href="miejsce.html">Miejsce na żywo</a> - <a href="ustawienia.html">Ustawienia paska</a>
+    <hr>
+    <form action="./php/program_submit.php" method="POST" enctype="multipart/form-data">
+        <h2>Wprowadź czas oraz wybierz loga dla programów, które będą się wyświetlać na pasku</h2>
+        <div class="form_input">
+            <div class="input_liczba"><label for="liczba">Liczba informacji:</label> <input id="liczba" name="liczba"
+                    type="number" placeholder="5" min="5" value="5" max="64" onchange="liczbaZmiana()"
+                    onkeyup="liczbaZmiana()" autocomplete="off" name="liczba"><br><br></div>
+            <div class="input info_input">
+                <div class="input"><label for="czas1">Czas oraz logo dla programu nr. 1:</label> <input id="czas1"
+                        type="time" name="czas1" required>|<input type="file" name="fileToUpload1" id="fileToUpload1">
+                </div><br />
+            </div>
+            <div class="input info_input">
+                <div class="input"><label for="czas2">Czas oraz logo dla programu nr. 2:</label> <input id="czas2"
+                        type="time" name="czas2" required>|<input type="file" name="fileToUpload2" id="fileToUpload2">
+                </div><br />
+            </div>
+            <div class="input info_input">
+                <div class="input"><label for="czas3">Czas oraz logo dla programu nr. 3:</label> <input id="czas3"
+                        type="time" name="czas3" required>|<input type="file" name="fileToUpload3" id="fileToUpload3">
+                </div><br />
+            </div>
+            <div class="input info_input">
+                <div class="input"><label for="czas4">Czas oraz logo dla programu nr. 4:</label> <input id="czas4"
+                        type="time" name="czas4" required>|<input type="file" name="fileToUpload4" id="fileToUpload4">
+                </div><br />
+            </div>
+            <div class="input info_input">
+                <div class="input"><label for="czas5">Czas oraz logo dla programu nr. 5:</label> <input id="czas5"
+                        type="time" name="czas5" required>|<input type="file" name="fileToUpload5" id="fileToUpload5">
+                </div><br />
+            </div>
+        </div>
+
+        <legend>Liczba programów liczy sie od 5 do 64. Plik loga musi być zdjęciem.</legend><br />
+        <button type="submit">Wyświetl</button> <input type="reset" value="Wyczysc" onclick="liczbaZmiana()">
+    </form>
+</body>
+<script>
+    function liczbaZmiana() {
+        setTimeout(() => {
+            var liczba = $("#liczba").val();
+
+            if (liczba > 64) {
+                $("#liczba").val(64);
+                liczba = 64;
+            } else if (liczba >= 5) {
+                setTimeout(() => {
+                    var teksty = [];
+                    $(".info_input").each(index => {
+                        teksty[index] = $("#info" + (index + 1)).val();
+                    });
+
+                    teksty.push("");
+
+                    $(".input").remove();
+
+                    for (var i = 1; i <= liczba; i++) {
+                        (function (index) {
+                            $(".form_input").append('<div class="input info_input"><div class="input"><label for="czas' + index + '">Czas oraz logo dla programu nr. ' + index + ':</label> <input id="czas' + index + '" type="time" name="czas' + index + '" required>|<input type="file" name="fileToUpload' + index + '" id="fileToUpload' + index + '"></div><br /></div>');
+                        })(i);
+                    }
+                }, 1);
+            }
+        }, 1);
+    }
+
+</script>
+
+</html>

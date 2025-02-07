@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inne informacje - modyfikator paska</title>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js'
+        integrity='sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=='
+        crossorigin='anonymous'></script>
+    <link rel="shortcut icon" href="./img/tvpinfo_logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="pasek.css">
+    <style>
+        body {
+            text-align: center;
+            font-family: "Metromedium 2 W02 Roman";
+            margin: 8px;
+            background-color: white;
+            overflow-x: hidden;
+        }
+
+        a:visited,
+        a:link {
+            text-decoration: none;
+            color: cornflowerblue;
+        }
+
+        .form_input {
+            display: flex;
+            flex-direction: column;
+            margin: 0 auto;
+            margin-bottom: 10px;
+            width: min-content;
+        }
+
+        .input,
+        .input_liczba {
+            display: flex;
+            align-items: flex-start;
+            white-space: nowrap;
+            justify-content: flex-end;
+            margin-bottom: 3px;
+        }
+
+        label {
+            margin-right: 5px;
+        }
+
+        legend {
+            color: #555555;
+            font-style: italic;
+        }
+
+        .example {
+            height: 15%;
+            margin-bottom: 10px;
+            border-radius: 20px;
+        }
+
+        .dolnabelka {
+            filter: drop-shadow(0px 0px 3px #000000);
+            user-select: none;
+            transition: right var(--dlugosc);
+            right: -1800px;
+        }
+
+        .t1x1 {
+            transform: scaleX(1.08427);
+        }
+
+        .t2 {
+            transform: scaleX(1.17527);
+        }
+    </style>
+</head>
+
+<body>
+    <a href="formularz.html"><img src="./img/tvpinfo_logo.png" alt="logo"></a>
+    <h1>Modyfikator paska z informacjami w stylu TVP INFO</h1>
+    <hr>
+    <a href="imienazwisko.html">Imie i nazwisko</a> - <a href="info.html">Główna informacja</a> - <a href="info2.html">Pilne
+            informacje</a> - <b><u>Inne informacje</u></b> - <a href="program.html">Zapowiedź programów</a> - <a href="czas.html">Czas na pasku</a> - <a href="miejsce.html">Miejsce na żywo</a> - <a href="ustawienia.html">Ustawienia paska</a>
+    <hr>
+    <form action="./php/info3_submit.php" method="GET">
+        <h2>Wpisz informacje, które wyświetlą się na białym pasku</h2>
+        <div class="form_input">
+            <div class="input_liczba"><label for="liczba">Liczba informacji:</label> <input id="liczba" name="liczba"
+                    type="number" placeholder="5" min="5" value="5" max="64" onchange="liczbaZmiana()"
+                    onkeyup="liczbaZmiana()" autocomplete="off" name="liczba"><br><br></div>
+            <div class="input info_input"><label for="info1">Informacja nr. 1:</label> <input type="text" id="info1"
+                    minlength="32" maxlength="256"
+                    placeholder="BARTEK F: WIELKI KOGUT TO JEST DLA NAS UDRĘKA NIE DO POWSTRZYMANIA" autocomplete="off"
+                    name="info1" required><br /></div>
+            <div class="input info_input"><label for="info2">Informacja nr. 2:</label> <input type="text" id="info2"
+                    minlength="32" maxlength="256"
+                    placeholder="BARTEK F: WIELKI KOGUT TO JEST DLA NAS UDRĘKA NIE DO POWSTRZYMANIA" autocomplete="off"
+                    name="info2" required><br /></div>
+            <div class="input info_input"><label for="info3">Informacja nr. 3:</label> <input type="text" id="info3"
+                    minlength="32" maxlength="256"
+                    placeholder="BARTEK F: WIELKI KOGUT TO JEST DLA NAS UDRĘKA NIE DO POWSTRZYMANIA" autocomplete="off"
+                    name="info3" required><br /></div>
+            <div class="input info_input"><label for="info4">Informacja nr. 4:</label> <input type="text" id="info4"
+                    minlength="32" maxlength="256"
+                    placeholder="BARTEK F: WIELKI KOGUT TO JEST DLA NAS UDRĘKA NIE DO POWSTRZYMANIA" autocomplete="off"
+                    name="info4" required><br /></div>
+            <div class="input info_input"><label for="info5">Informacja nr. 5:</label> <input type="text" id="info5"
+                    minlength="32" maxlength="256"
+                    placeholder="BARTEK F: WIELKI KOGUT TO JEST DLA NAS UDRĘKA NIE DO POWSTRZYMANIA" autocomplete="off"
+                    name="info5" required><br /><br /></div>
+        </div>
+
+        <legend>Liczba informacji liczy sie od 5 do 64. Informacje powinny składać się od 32 do 256 znaków. Wielkość
+            znaków ma znaczenie.</legend><br />
+        <button type="submit">Wyświetl</button> <input type="reset" value="Wyczysc" onclick="liczbaZmiana()">
+    </form>
+</body>
+<script>
+    function liczbaZmiana() {
+        setTimeout(() => {
+            var liczba = $("#liczba").val();
+
+            if (liczba > 64) {
+                $("#liczba").val(64);
+                liczba = 64;
+            } else if (liczba >= 5) {
+                setTimeout(() => {
+                    var teksty = [];
+                    $(".info_input").each(index => {
+                        teksty[index] = $("#info" + (index + 1)).val();
+                    });
+
+                    teksty.push("");
+
+                    $(".input").remove();
+
+                    for (var i = 1; i <= liczba; i++) {
+                        (function (index) {
+                            $(".form_input").append("<div class='input info_input'><label for='info" + index + "'>Informacja nr. " + index + ":</label> <input type='text' id='info" + index + "' minlength='32' maxlength='256' placeholder='BARTEK F: WIELKI KOGUT TO JEST DLA NAS UDRĘKA NIE DO POWSTRZYMANIA' value='" + teksty[index - 1] + "' autocomplete='off' name='info" + index + "' required><br /></div>");
+
+                            $("#info" + index).on("input", function () {
+                                $(".t2").text($("#info" + index).val());
+                                if ($("#info" + index).val() == "") {
+                                    $(".t2").text("BARTEK F: WIELKI KOGUT TO JEST DLA NAS UDRĘKA NIE DO POWSTRZYMANIA");
+                                }
+
+                                if ($("#info" + index).val().length < 32 || $("#info" + index).val().length > 256) {
+                                    $("#info" + index).css({
+                                        color: "red"
+                                    });
+                                } else {
+                                    $("#info" + index).css({
+                                        color: "black"
+                                    })
+                                }
+                                szerokoscT2();
+                            });
+                        })(i);
+                    }
+                }, 1);
+            }
+        }, 1);
+    }
+    
+    $("#info1").on("input", function () {
+        $(".t2").text($("#info1").val());
+        if ($("#info1").val() == "") {
+            $(".t2").text("BARTEK F: WIELKI KOGUT TO JEST DLA NAS UDRĘKA NIE DO POWSTRZYMANIA");
+        }
+
+        if ($("#info1").val().length < 32 || $("#info1").val().length > 256) {
+            $("#info1").css({
+                color: "red"
+            });
+        } else {
+            $("#info1").css({
+                color: "black"
+            })
+        }
+        szerokoscT2();
+    });
+
+    $("#info2").on("input", function () {
+        $(".t2").text($("#info2").val());
+        if ($("#info2").val() == "") {
+            $(".t2").text("BARTEK F: WIELKI KOGUT TO JEST DLA NAS UDRĘKA NIE DO POWSTRZYMANIA");
+        }
+
+        if ($("#info2").val().length < 32 || $("#info2").val().length > 256) {
+            $("#info2").css({
+                color: "red"
+            });
+        } else {
+            $("#info2").css({
+                color: "black"
+            })
+        }
+        szerokoscT2();
+    });
+
+    $("#info3").on("input", function () {
+        $(".t2").text($("#info3").val());
+        if ($("#info3").val() == "") {
+            $(".t2").text("BARTEK F: WIELKI KOGUT TO JEST DLA NAS UDRĘKA NIE DO POWSTRZYMANIA");
+        }
+
+        if ($("#info3").val().length < 32 || $("#info3").val().length > 256) {
+            $("#info3").css({
+                color: "red"
+            });
+        } else {
+            $("#info3").css({
+                color: "black"
+            })
+        }
+        szerokoscT2();
+    });
+
+    $("#info4").on("input", function () {
+        $(".t2").text($("#info4").val());
+        if ($("#info4").val() == "") {
+            $(".t2").text("BARTEK F: WIELKI KOGUT TO JEST DLA NAS UDRĘKA NIE DO POWSTRZYMANIA");
+        }
+
+        if ($("#info4").val().length < 32 || $("#info4").val().length > 256) {
+            $("#info4").css({
+                color: "red"
+            });
+        } else {
+            $("#info4").css({
+                color: "black"
+            })
+        }
+        szerokoscT2();
+    });
+
+    $("#info5").on("input", function () {
+        $(".t2").text($("#info5").val());
+        if ($("#info5").val() == "") {
+            $(".t2").text("BARTEK F: WIELKI KOGUT TO JEST DLA NAS UDRĘKA NIE DO POWSTRZYMANIA");
+        }
+
+        if ($("#info5").val().length < 32 || $("#info5").val().length > 256) {
+            $("#info5").css({
+                color: "red"
+            });
+        } else {
+            $("#info5").css({
+                color: "black"
+            })
+        }
+        szerokoscT2();
+    });
+</script>
+
+</html>

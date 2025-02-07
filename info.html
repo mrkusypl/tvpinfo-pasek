@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Główna informacja - modyfikator paska</title>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js'
+        integrity='sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=='
+        crossorigin='anonymous'></script>
+        <link rel="shortcut icon" href="./img/tvpinfo_logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="pasek.css">
+    <style>
+        body {
+            text-align: center;
+            font-family: "Metromedium 2 W02 Roman";
+            margin: 8px;
+            background-color: white;
+            overflow-x: hidden;
+        }
+
+        input[type="text"] {
+            margin-bottom: 5px;
+        }
+
+        a:visited,
+        a:link {
+            text-decoration: none;
+            color: cornflowerblue;
+        }
+
+        .form_input {
+            display: flex;
+            flex-direction: column;
+            margin: 0 auto;
+            margin-bottom: 10px;
+            width: min-content;
+        }
+
+        .input {
+            display: flex;
+            align-items: flex-start;
+            white-space: nowrap;
+            justify-content: flex-end;
+            margin-bottom: 3px;
+        }
+
+        label {
+            margin-right: 5px;
+        }
+
+        legend {
+            color: #555555;
+            font-style: italic;
+        }
+
+        .example {
+            height: 15%;
+            margin-bottom: 10px;
+            border-radius: 20px;
+        }
+
+        .dolnabelka {
+            filter: drop-shadow(0px 0px 3px #000000);
+            user-select: none;
+            transition: right var(--dlugosc);
+            right: -1800px;
+        }
+
+        .t1x1 {
+            transform: scaleX(1.08427);
+        }
+
+        .t2 {
+            transform: scaleX(1.17527);
+        }
+
+        .program_logo {
+            height: calc(100% - 35px);
+        }
+
+        .program_godzina {
+            transform: translateY(0);
+        }
+
+        .img1 {
+            transform: scale(1);
+        }
+    </style>
+</head>
+
+<body>
+    <a href="formularz.html"><img src="./img/tvpinfo_logo.png" alt="logo"></a>
+    <h1>Modyfikator paska z informacjami w stylu TVP INFO</h1>
+    <hr>
+    <a href="imienazwisko.html">Imie i nazwisko</a> - <b><u>Główna informacja</u></b> - <a href="info2.html">Pilne
+        informacje</a> - <a href="info3.html">Inne informacje</a> - <a href="program.html">Zapowiedź programów</a> - <a href="czas.html">Czas na pasku</a> - <a href="miejsce.html">Miejsce na żywo</a> - <a href="ustawienia.html">Ustawienia paska</a>
+    <hr>
+    <form action="./php/info_submit.php" method="GET">
+        <h2>Wpisz główną informację</h2>
+        <div class="form_input">
+            <div class="input"><label for="informacja">Informacja:</label> <input id="informacja" type="text"
+                    minlength="20" maxlength="64" placeholder="WIELKI CZARNY KOGUT STRASZY LUDZI" autocomplete="off"
+                    name="informacja" required></div><br /><br />
+        </div>
+        <legend>Informacja powinna składać się od 20 do 64 znaków. Wielkość znaków <u>nie ma</u> znaczenia.</legend>
+        <br />
+        <button type="submit">Wyświetl</button> <input type="reset" value="Wyczysc">
+    </form>
+    <div class="dolnabelka">
+        <div class="gornabelka">
+            <div class="lewygorny">
+                <div class="program_logo">
+                    <img class="img1" src="./img/jp2.png" alt="program_logo2">
+                </div>
+                <div class="program_godzina">
+                    21:37
+                </div>
+            </div>
+            <div class="prawygorny">
+                <div class="info">
+                    <span class="tekst t1 t1x1">
+                        WIELKI CZARNY KOGUT STRASZY LUDZI
+                    </span>
+                </div>
+                <div class="kto">
+                    <div class="kto_tekst">
+                        <div class="kto_dane">
+                        </div>
+                        <div class="kto_kimjest">
+                        </div>
+                    </div>
+                </div>
+                <div class="pasekpilne">
+                    <div class="pilne">
+                        PILNE
+                    </div>
+                    <div class="info2">
+                        <span class="tekst t2">
+                            BARTEK F: WIELKI KOGUT TO JEST DLA NAS UDRĘKA NIE DO POWSTRZYMANIA
+                        </span>
+                    </div>
+                    <div class="info2_kolor">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="logo_tvp">
+                <img src="./img/tvpinfo_logo.png" width="200px" alt="logo">
+            </div>
+            <div class="bialabelka">
+                <marquee scrollamount="0">tur adipisicing elit. Amet ratione quia laborum cumque, repudiandae voluptatum
+                </marquee>
+            </div>
+            <div class="time" id="currentTime">
+                22:15
+            </div>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function () {
+            $(".dolnabelka").on("mouseenter", function () {
+                $(".dolnabelka").css({
+                    right: "0"
+                });
+            });
+
+            $(".dolnabelka").on("mouseleave", function () {
+                $(".dolnabelka").css({
+                    right: "-1800px"
+                })
+            })
+        });
+
+        function zmianaInfo(tekst) {
+            $(".t1x2").css({
+                transform: "scaleY(0) scaleX(" + 1500 / $(".t1x2").width() + ")",
+                opacity: 0
+            });
+
+            $(".t1x1").css({
+                transition: "none"
+            });
+
+            $(".t1x1").text(tekst);
+
+            $(".t1x1").css({
+                transform: "scaleY(0) scaleX(" + 1500 / $(".t1x1").width() + ")",
+            });
+
+            setTimeout(() => {
+                $(".t1x2").text("brak");
+                $(".t1x1").css({
+                    transform: "scaleY(1) scaleX(" + 1500 / $(".t1x1").width() + ")",
+                    opacity: 1,
+                    transition: "transform var(--dlugosc), opacity calc(var(--dlugosc) * 0.5)"
+                });
+            }, 50);
+        }
+
+        $("#informacja").on("input", function () {
+            if ($("#informacja").val() == "") {
+                zmianaInfo("WIELKI CZARNY KOGUT STRASZY LUDZI");
+            } else {
+                zmianaInfo($("#informacja").val());
+            }
+
+            if($("#informacja").val().length < 20 || $("#informacja").val().length > 64) {
+                $("#informacja").css({
+                    color: "red"
+                })
+            } else {
+                $("#informacja").css({
+                    color: "black"
+                })
+            }
+        })
+    </script>
+</body>
+
+</html>
